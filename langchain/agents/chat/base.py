@@ -31,8 +31,7 @@ class ChatAgent(Agent):
     def _construct_scratchpad(
         self, intermediate_steps: List[Tuple[AgentAction, str]]
     ) -> str:
-        agent_scratchpad = super()._construct_scratchpad(intermediate_steps)
-        if agent_scratchpad:
+        if agent_scratchpad := super()._construct_scratchpad(intermediate_steps):
             return (
                 f"This was your previous work "
                 f"(but I haven't seen any of it! I only see what "

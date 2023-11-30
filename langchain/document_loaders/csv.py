@@ -34,14 +34,13 @@ class CSVLoader(BaseLoader):
 
         with open(self.file_path, newline="") as csvfile:
             csv = DictReader(csvfile, **self.csv_args)  # type: ignore
-            for row in csv:
-                docs.append(
-                    Document(
-                        page_content="\n".join(
-                            f"{k.strip()}: {v.strip()}" for k, v in row.items()
-                        ),
-                        metadata={"source": self.file_path},
-                    )
+            docs.extend(
+                Document(
+                    page_content="\n".join(
+                        f"{k.strip()}: {v.strip()}" for k, v in row.items()
+                    ),
+                    metadata={"source": self.file_path},
                 )
-
+                for row in csv
+            )
         return docs

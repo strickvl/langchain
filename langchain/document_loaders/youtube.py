@@ -156,7 +156,7 @@ class YoutubeLoader(BaseLoader):
                 "Please it install it with `pip install pytube`."
             )
         yt = YouTube(f"https://www.youtube.com/watch?v={self.video_id}")
-        video_info = {
+        return {
             "title": yt.title,
             "description": yt.description,
             "view_count": yt.views,
@@ -165,7 +165,6 @@ class YoutubeLoader(BaseLoader):
             "length": yt.length,
             "author": yt.author,
         }
-        return video_info
 
 
 @dataclass
@@ -261,8 +260,7 @@ class GoogleApiYoutubeLoader(BaseLoader):
             maxResults=1,  # we only need one result since channel names are unique
         )
         response = request.execute()
-        channel_id = response["items"][0]["id"]["channelId"]
-        return channel_id
+        return response["items"][0]["id"]["channelId"]
 
     def _get_document_for_channel(self, channel: str, **kwargs: Any) -> List[Document]:
         channel_id = self._get_channel_id(channel)

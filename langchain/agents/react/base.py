@@ -44,7 +44,7 @@ class ReActDocstoreAgent(Agent, BaseModel):
         self.i = 1
 
     def _fix_text(self, text: str) -> str:
-        return text + f"\nAction {self.i}:"
+        return f"{text}\nAction {self.i}:"
 
     def _extract_tool_and_input(self, text: str) -> Optional[Tuple[str, str]]:
         action_prefix = f"Action {self.i}: "

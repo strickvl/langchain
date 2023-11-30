@@ -39,7 +39,7 @@ class PromptLayerChatOpenAI(ChatOpenAI, BaseModel):
         generated_responses = super()._generate(messages, stop)
         request_end_time = datetime.datetime.now().timestamp()
         message_dicts, params = super()._create_message_dicts(messages, stop)
-        for i, generation in enumerate(generated_responses.generations):
+        for generation in generated_responses.generations:
             response_dict, params = super()._create_message_dicts(
                 [generation.message], stop
             )
@@ -66,7 +66,7 @@ class PromptLayerChatOpenAI(ChatOpenAI, BaseModel):
         generated_responses = await super()._agenerate(messages, stop)
         request_end_time = datetime.datetime.now().timestamp()
         message_dicts, params = super()._create_message_dicts(messages, stop)
-        for i, generation in enumerate(generated_responses.generations):
+        for generation in generated_responses.generations:
             response_dict, params = super()._create_message_dicts(
                 [generation.message], stop
             )
